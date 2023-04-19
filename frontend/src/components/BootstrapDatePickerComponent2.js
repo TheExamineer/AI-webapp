@@ -18,21 +18,16 @@ export const BootstrapDatePickerComponent2 = () => {
 
     console.log("Selected Date: ", selectedDate);
 
-    fetch("http://127.0.0.1:5000//getting-data", {
+    fetch("http://localhost:5000/submit-date", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ date: selectedDate }),
     })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Response from backend:", data);
-      })
-      .catch((error) => {
-        console.error("Error sending data to backend:", error);
-      });
-  };
+    
+    };
+  
 
   return (
     <div>
