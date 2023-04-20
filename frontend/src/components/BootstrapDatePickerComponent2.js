@@ -18,7 +18,7 @@ export const BootstrapDatePickerComponent2 = () => {
 
     console.log("Selected Date: ", selectedDate);
 
-    fetch("http://localhost:5000/submit-date", {
+    fetch("http://localhost:5000/submit-enddate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -35,7 +35,7 @@ export const BootstrapDatePickerComponent2 = () => {
         <div className="col-md-4">
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="dob">
-              <Form.Label>Select Date</Form.Label>
+              <Form.Label>End Date</Form.Label>
               <Form.Control
                 type="date"
                 name="dob"

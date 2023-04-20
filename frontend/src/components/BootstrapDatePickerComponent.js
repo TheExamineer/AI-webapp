@@ -1,24 +1,56 @@
-import React from 'react'
-import { Form } from 'react-bootstrap';
- 
-export const BootstrapDatePickerComponent = () => {
 
-    return (
-     <div>
-        <div className="row">
+import React from 'react'
+import { Form, Button } from 'react-bootstrap';
+import { useState } from "react";
+
+
+export const BootstrapDatePickerComponent = () => {
+  const [selectedDate, setSelectedDate] = useState("");
+
+  const handleDateChange = (event) => {
+    setSelectedDate(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    // Send the selected date to the backend using your preferred method (e.g. fetch, axios, etc.)
+
+    console.log("Selected Date: ", selectedDate);
+
+    fetch("http://localhost:5000/submit-startdate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ date: selectedDate }),
+    })
+    
+    };
+  
+
+  return (
+    <div>
+      <div className="row">
         <div className="col-md-4">
-        <Form.Group controlId="dob">
-            <Form.Label>Select Date</Form.Label>
-            <Form.Control type="date" name="dob" placeholder="Date of Birth" />
-        </Form.Group>
+          <Form onSubmit={handleSubmit}>
+            <Form.Group controlId="dob">
+              <Form.Label>Start Date</Form.Label>
+              <Form.Control
+                type="date"
+                name="dob"
+                placeholder="Date of Birth"
+                value={selectedDate}
+                onChange={handleDateChange}
+              />
+            </Form.Group>
+            <Button type="submit">Submit</Button>
+          </Form>
+        </div>
+      </div>
     </div>
-</div>
-</div>
-        
-    )
-}
- 
-export default BootstrapDatePickerComponent;
+  );
+};
 
 
 
