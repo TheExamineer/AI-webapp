@@ -25,13 +25,27 @@ export const BootstrapDatePickerComponent = () => {
       },
       body: JSON.stringify({ date: selectedDate }),
     })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log(data);
+      // Handle the response data here
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      // Handle errors here
+    });
     
     };
   
 
   return (
-    <div>
-      <div className="row">
+    <div style={{ display: 'flex', justifyContent: 'center', textAlign: 'center'   }}>
+      <div className="row" style={{ width: '80%' }}>
         <div className="col-md-4">
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="dob">

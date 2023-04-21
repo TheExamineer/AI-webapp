@@ -1,5 +1,5 @@
 import React, { useEffect, useState, } from 'react';
-import {  Button } from 'react-bootstrap';
+import {  Button,Table } from 'react-bootstrap';
 
 
 
@@ -14,7 +14,7 @@ const fetchData = async () => {
   const response = await fetch('http://localhost:5000/get-data');
   const data = await response.json();
   setData(data);
-  console.log(data.length);
+  console.log(data);
 };
 
 
@@ -27,7 +27,7 @@ const fetchData = async () => {
   const renderTable = () => {
     console.log('rendering table');
     return (
-      <table>
+      <Table>
         <thead>
           <tr>
             <th>Index</th>
@@ -48,7 +48,7 @@ const fetchData = async () => {
             </tr>
           ))}
         </tbody>
-      </table>
+      </Table>
     );
   };
 
@@ -56,7 +56,7 @@ const fetchData = async () => {
     <div>
       <Button variant="success" onClick={fetchData}>Fetch Data</Button>
       
-      {data.length > 0 ? renderTable() : null}
+      {data.length > -1 ? renderTable() : null}
     </div>
   );
 

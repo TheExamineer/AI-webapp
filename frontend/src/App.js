@@ -12,8 +12,9 @@ function App() {
     <BootstrapDatePickerComponent /> 
     <BootstrapDatePickerComponent2 />  
     <Upload/> 
+     <Delete/>
     <Table1/> 
-     <Delete/> 
+
   </div>  
   );
 }

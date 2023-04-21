@@ -1,4 +1,4 @@
-from flask import Blueprint , request, jsonify
+from flask import Blueprint , request, jsonify, current_app
 from flask_cors import cross_origin
 from flask_cors import CORS
 from pymongo import MongoClient
@@ -17,9 +17,21 @@ CORS(blueprint3, resources={r"/*": {"origins": "*"}})
 @cross_origin()
 def get_data():
     # Get the start and end dates from the query parameters
-    start_date = request.args.get('start_date')
-    end_date = request.args.get('end_date')
-
+    result1 = collection.find_one()
+    if result1:
+       
+        start_date =   result1.get('start_date')
+       
+    else:
+        return {'message': 'Dindt Find Start/End/Both '}
+    result2 = collection.find_one()
+    if result2: 
+        end_date =   result2.get('end_date') 
+    else:
+        return {'message': 'Fucked by end date '}
+    
+    print(start_date)
+    print(end_date)
     # Query the MongoDB collection to get the data
     data = collection.find({'date': {'$gte': start_date, '$lte': end_date}}, {'_id': False})
 
@@ -36,6 +48,8 @@ def get_data():
             'object': doc['object'],
             'img':   encoded_string
         })
+        for i,doc in data:
+            print("Document found:", doc)
       
 
     # Return the response data as JSON

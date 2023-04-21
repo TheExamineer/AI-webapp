@@ -22,4 +22,4 @@ app.register_blueprint(blueprint5)
 
 
 if __name__ == "__main__":
-  app.run()
+  app.run(debug=True)

@@ -22,15 +22,8 @@ CORS(blueprint4, resources={r"/*": {"origins": "*"}}) #allows to all url access
 def handle_post_request():
     data = request.get_json()
     start_date = data.get('date') 
-    # replace 'date' with the name of the input field
-    # response_data = {'message': 'Success! Selected date was {}'.format(selected_date)}
-
-# do something with the selected_date, such as save it to a database or perform calculations
-   # collection.insert_one({'date': selected_date})
-   # client.admin.command('ping')
-   # print("Pinged your deployment. You successfully connected to MongoDB!")
-    # ...
-
-    # return a JSON response with the data to send back to the frontend
+   
+     # Store the variable in MongoDB
+    collection.insert_one({'start_date': start_date})
    
     return {'message': 'StartDate saved to backend'}
