@@ -25,10 +25,10 @@ def handle_post_request():
     # replace 'date' with the name of the input field
     # response_data = {'message': 'Success! Selected date was {}'.format(selected_date)}
 
-    # do something with the selected_date, such as save it to a database or perform calculations
-    # collection.insert_one({'date': selected_date})
-    # client.admin.command('ping')
-    # print("Pinged your deployment. You successfully connected to MongoDB!")
+# do something with the selected_date, such as save it to a database or perform calculations
+   # collection.insert_one({'date': selected_date})
+   # client.admin.command('ping')
+   # print("Pinged your deployment. You successfully connected to MongoDB!")
     # ...
 
     # return a JSON response with the data to send back to the frontend

@@ -36,9 +36,9 @@ def handle_post_request():
     # Save the CSV data to the MongoDB collection
     for row in data:
         doc = {
-            "field1": row[0],
-            "field2": row[1],
-            "field3": row[2]
+            "img_id": row[0],
+            "object": row[1],
+            "date": row[2]
         }
         collection.insert_one(doc)
    
