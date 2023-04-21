@@ -6,14 +6,17 @@ export const Delete = () => {
 
   const handleDeleteAll = async () => {
     try {
-      const response = await fetch('http://localhost:5000/delete-all', {
+      const response = await fetch('https://backend-5vhy.onrender.com/delete-all', {
         method: 'DELETE'
       });
       const data = await response.json();
       setMessage(data.message);
-    } catch (error) {
+    } 
+    
+    catch (error) {
       setMessage(error.message);
     }
+    
   };
 
   return (

@@ -18,7 +18,7 @@ export const Upload = () => {
     
     formData.append('csv', file);
 
-    fetch('http://127.0.0.1:5000/upload-csv', {
+    fetch('https://backend-5vhy.onrender.com/upload-csv', {
       method: 'POST',
       body: formData
     })

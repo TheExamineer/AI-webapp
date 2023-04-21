@@ -18,7 +18,7 @@ export const BootstrapDatePickerComponent2 = () => {
 
     console.log("Selected Date: ", selectedDate);
 
-    fetch("http://localhost:5000/submit-enddate", {
+    fetch("https://backend-5vhy.onrender.com/submit-enddate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
