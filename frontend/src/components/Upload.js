@@ -34,7 +34,7 @@ export const Upload = () => {
 
     return (
         <div style={{ textAlign: "center" }}>
-            <h1>REACTJS CSV IMPORT EXAMPLE </h1>
+            <h1>PLEASE UPLOAD YOUR CSV FILE </h1>
             <Form>
                 <input
                     type={"file"}

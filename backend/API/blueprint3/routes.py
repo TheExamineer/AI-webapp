@@ -3,7 +3,7 @@ from flask_cors import cross_origin
 from flask_cors import CORS
 from pymongo import MongoClient
 import base64
-
+import os
 
 uri = "mongodb+srv://user1:1234@cluster0.aacymnc.mongodb.net/?retryWrites=true&w=majority"
 # Create a new client and connect to the serveruser1:1234
@@ -57,6 +57,10 @@ def get_data():
         
 # Create a list of dictionaries to hold the data
         response_data = []
+        response_data.append({
+            'start_date': start_date,
+            'end_date':end_date
+        })
         
         
         
@@ -71,12 +75,16 @@ def get_data():
                         'img_id': doc['img_id'],
                         'object': doc['object'],
                         'img':   encoded_string
+                        
                     })
+            print(response_data[0]['start_date'])
+            print(response_data[0]['end_date'])
+
         if response_data:
             return jsonify(response_data),200
         else:
             error_message = {'message': 'No documents found based on the specified keys'}
-            return jsonify(error_message), 404
+            return jsonify(error_message), 405
          #   else:
           #      error_message = {'message': 'Start date and/or end date not found in database'}
            #     return jsonify(error_message), 408
