@@ -1,5 +1,5 @@
 import React, { useEffect, useState, } from 'react';
-import {  Button } from 'react-bootstrap';
+import {  Button,Table } from 'react-bootstrap';
 
 
 
@@ -27,7 +27,7 @@ const fetchData = async () => {
   const renderTable = () => {
     console.log('rendering table');
     return (
-      <table>
+      <Table bordered striped>
         <thead>
           <tr>
             <th>Index</th>
@@ -48,15 +48,18 @@ const fetchData = async () => {
             </tr>
           ))}
         </tbody>
-      </table>
+      </Table>
     );
   };
 
   return (
     <div>
-      <Button variant="success" onClick={fetchData}>Fetch Data</Button>
-      
-      {data.length > 0 ? renderTable() : null}
+          <div className="d-flex justify-content-center">
+  <Button variant="success" onClick={fetchData}>Fetch Data</Button>
+</div>
+<div >
+  {data.length > 0 ? renderTable() : null}
+</div>
     </div>
   );
 
