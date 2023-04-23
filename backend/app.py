@@ -25,4 +25,4 @@ app.register_blueprint(blueprint5)
 
 
 if __name__ == "__main__":
-  app.run('https://api.render.com/deploy/srv-cgup2n4s3fvhrtru2h7g?key=vy4DAaCBn9A', port=5000)
+  app.run()

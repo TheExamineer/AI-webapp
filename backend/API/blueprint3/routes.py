@@ -4,8 +4,9 @@ from flask_cors import CORS
 from pymongo import MongoClient
 import base64
 
+
 uri = "mongodb+srv://user1:1234@cluster0.aacymnc.mongodb.net/?retryWrites=true&w=majority"
-# Create a new client and connect to the server
+# Create a new client and connect to the serveruser1:1234
 client = MongoClient(uri)
 db = client['NEW'] # replace with your database name
 collection = db['1ST'] # replace with your collection name
@@ -17,40 +18,75 @@ CORS(blueprint3, resources={r"/*": {"origins": "*"}})
 @cross_origin()
 def get_data():
     # Get the start and end dates from the query parameters
-    result1 = collection.find_one()
-    if result1:
+       # result = collection.find()
+   
        
-        start_date =   result1.get('start_date')
-       
-    else:
-        return {'message': 'Dindt Find Start/End/Both '}
-    result2 = collection.find_one()
-    if result2: 
-        end_date =   result2.get('end_date') 
-    else:
-        return {'message': 'Fucked by end date '}
-    
-    print(start_date)
-    print(end_date)
+        cursor = collection.find()
+        for document in cursor:
+            end_date = document.get("end_date")
+            print('Value of end_date:', end_date)
+            if end_date is not None:
+                break   
+        
+        
+        cursor1 = collection.find()
+        for document in cursor1:
+            start_date = document.get("start_date")  
+            print('Value of start_date:', start_date)  
+            if start_date is not None :
+                break
+            
+        
+           # if start_date is not None and end_date is not None:
+            #    print('Value of end_date:', end_date)
+             #   print('Value of start_date:', start_date)
+              
+
+        
     # Query the MongoDB collection to get the data
-    data = collection.find({'date': {'$gte': start_date, '$lte': end_date}}, {'_id': False})
+               # collection.delete_many({start_date: {'$exists': True}})
+               # collection.delete_many({end_date: {'$exists': True}})
+        query = {"date": {'$gte': start_date, '$lte': end_date}}
+        print('Query:', query)
+        data = collection.find(query, {'_id': False})
+       # num_docs = len(data)
+      #  print(f"Number of documents found: {num_docs}")
+      #  for doc in data:
+      #      print(doc)
 
-    # Create a list of dictionaries to hold the data
-    response_data = []
+        
+# Create a list of dictionaries to hold the data
+        response_data = []
+        
+        
+        
 
-    # Iterate over the MongoDB data and append the required fields to the response data
-    for i,doc in data:
-        with open(f'../../images/{doc["img_id"]}.jpg', 'rb') as img_file:
-            encoded_string = base64.b64encode(img_file.read()).decode('utf-8')
-        response_data.append({
-            'index': i + 1,
-            'img_id': doc['img_id'],
-            'object': doc['object'],
-            'img':   encoded_string
-        })
-        for i,doc in data:
-            print("Document found:", doc)
+# Iterate over the MongoDB data and append the required fields to the response data
+        for i,doc in enumerate(data):
+            
+            with open(f'./images/{doc["img_id"]}', 'rb') as img_file:
+                    encoded_string = base64.b64encode(img_file.read()).decode('utf-8')
+                    response_data.append({
+                        'index': i + 1,
+                        'img_id': doc['img_id'],
+                        'object': doc['object'],
+                        'img':   encoded_string
+                    })
+        if response_data:
+            return jsonify(response_data),200
+        else:
+            error_message = {'message': 'No documents found based on the specified keys'}
+            return jsonify(error_message), 404
+         #   else:
+          #      error_message = {'message': 'Start date and/or end date not found in database'}
+           #     return jsonify(error_message), 408
+    
+      
+       
+
+    
+    
+  
       
 
-    # Return the response data as JSON
-    return jsonify(response_data)
+    
