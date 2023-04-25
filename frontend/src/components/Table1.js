@@ -90,7 +90,7 @@ export const Table1 = () => {
     <div>
       <div className="d-flex justify-content-center">
         <Button variant="primary" onClick={() => fetchDataAndDownload()}>
-          Download Report
+         Get Updated Report Table & Download Report
         </Button>
       </div>
       <div>
