@@ -24,7 +24,7 @@ def get_data():
         cursor = collection.find()
         for document in cursor:
             end_date = document.get("end_date")
-            print('Value of end_date:', end_date)
+            # print('Value of end_date:', end_date)
             if end_date is not None:
                 break   
         
@@ -32,7 +32,7 @@ def get_data():
         cursor1 = collection.find()
         for document in cursor1:
             start_date = document.get("start_date")  
-            print('Value of start_date:', start_date)  
+            # print('Value of start_date:', start_date)  
             if start_date is not None :
                 break
             
@@ -47,7 +47,7 @@ def get_data():
                # collection.delete_many({start_date: {'$exists': True}})
                # collection.delete_many({end_date: {'$exists': True}})
         query = {"date": {'$gte': start_date, '$lte': end_date}}
-        print('Query:', query)
+        # print('Query:', query)
         data = collection.find(query, {'_id': False})
        # num_docs = len(data)
       #  print(f"Number of documents found: {num_docs}")
@@ -77,14 +77,14 @@ def get_data():
                         'img':   encoded_string
                         
                     })
-            print(response_data[0]['start_date'])
-            print(response_data[0]['end_date'])
+            # print(response_data[0]['start_date'])
+            # print(response_data[0]['end_date'])
 
         if response_data:
             return jsonify(response_data),200
         else:
             error_message = {'message': 'No documents found based on the specified keys'}
-            return jsonify(error_message), 405
+            return jsonify(error_message), 404
          #   else:
           #      error_message = {'message': 'Start date and/or end date not found in database'}
            #     return jsonify(error_message), 408
