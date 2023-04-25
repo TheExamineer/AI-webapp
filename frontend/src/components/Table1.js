@@ -12,7 +12,7 @@ export const Table1 = () => {
   }, []);
 
   const fetchData = async () => {
-    const response = await fetch('https://backend-5vhy.onrender.com/upload-csv/get-data');
+    const response = await fetch('https://backend-5vhy.onrender.com/get-data');
     const data = await response.json();
     setData(data);
     setStartDate(data.start_date);
